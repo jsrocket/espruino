@@ -1,4 +1,4 @@
-exports = function() {
+exports.servo = function() {
     var CURRENTPOS=null,
         PIN=null,
         INTERVAL=null,
