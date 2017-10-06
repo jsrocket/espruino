@@ -1,4 +1,4 @@
-exports.servo = function() {
+var servo = function() {
     var CURRENTPOS=null,
         PIN=null,
         INTERVAL=null,
@@ -113,4 +113,6 @@ exports.servo = function() {
         stop:function(){ clearInterval(INTERVAL); }
   
     };
-}
+};
+
+module.exports = servo;
