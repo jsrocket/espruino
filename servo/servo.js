@@ -115,4 +115,4 @@ var servo = function() {
     };
 };
 
-module.exports = servo;
+exports = servo;
