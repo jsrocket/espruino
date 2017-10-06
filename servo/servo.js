@@ -17,7 +17,7 @@ var servo = function() {
     
             PIN=params.pin;
     
-            var rPos=E.clip(params.pos*3,0.01,3);
+            var rPos=E.clip(params.pos*3,0,3);
             CURRENTPOS=rPos;
 
             if(typeof params.is_at==='undefined'){
@@ -36,7 +36,7 @@ var servo = function() {
         },
   
         moveTo:function(pos, time, holdTime, cb){
-            var rPos=E.clip(pos*3,0.01,3).toFixed(2),
+            var rPos=E.clip(pos*3,0,3).toFixed(2),
                 posDelta,
                 moveAmt=(1000/INTERVALTIME)*(time/1000),
                 that=this,
@@ -68,7 +68,7 @@ var servo = function() {
                     CURRENTPOS-=(posDelta/moveAmt);
                 }
       
-                CURRENTPOS=E.clip(parseFloat(CURRENTPOS.toFixed(2)),0.01,3);
+                CURRENTPOS=E.clip(parseFloat(CURRENTPOS.toFixed(2)),0,3);
       
                 if((CURRENTPOS<rPos && direction==='cw') || (CURRENTPOS>rPos && direction==='ccw')){
                     digitalPulse(PIN,1,CURRENTPOS);
