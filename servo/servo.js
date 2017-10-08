@@ -1,3 +1,8 @@
+/* Copyright (c) 2017 Ken Kozaczka. See the file LICENSE for copying permission. */
+/*
+    Yet another servo module, but at least this one has a couple extra features that the main servo module does not.
+*/
+
 var servo = function() {
     var CURRENTPOS=null,
         PIN=null,
@@ -41,7 +46,7 @@ var servo = function() {
                 moveAmt=(1000/INTERVALTIME)*(time/1000),
                 that=this,
                 direction='cw',
-                intervalKillSwitch=500;
+                intervalKillSwitch=5000;
 
             rPos=parseFloat(rPos);
     
