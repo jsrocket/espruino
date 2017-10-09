@@ -142,3 +142,5 @@ var pixelfx = function(PIN, PIXELCNT) {
     },
   };
 };
+
+exports = pixelfx;
