@@ -1,4 +1,4 @@
-var pixelfx = function(PIN, PIXELCNT) {
+exports.init = function(PIN, PIXELCNT) {
   var PULSECNT=0;
   
   responder=function(cb,d){
@@ -143,4 +143,3 @@ var pixelfx = function(PIN, PIXELCNT) {
   };
 };
 
-exports = pixelfx;
