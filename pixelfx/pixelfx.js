@@ -135,7 +135,7 @@ exports.init = function(PIN, PIXELCNT) {
               PULSECNT=0;
             }else{
               PULSECNT++;
-              this.pulse();
+              that.pulse();
             }
           });
         });
