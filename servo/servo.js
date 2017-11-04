@@ -1,47 +1,41 @@
 /* Copyright (c) 2017 Ken Kozaczka. See the file LICENSE for copying permission. */
 /*
-    Yet another servo module, but at least this one has a couple extra features that the main servo module does not.
+    Yet another servo module. Yes, I know it's pretty verbose but I'm not too worried about that and I will address that if space becomes an issue. 
 */
 
-var servo = function() {
-    var CURRENTPOS=null,
-        PIN=null,
+exports.connect = function (PPIN, PARAMS) {
+    var CURRENTPOS=0,
+        PIN=PPIN,
         INTERVAL=null,
-        INTERVALTIME=20;
+        INTERVALTIME=20,
+        MINPULSE=0,
+        MAXPULSE=1
+        
+        if(PARAMS && typeof PARAMS.min_pulse!=='undefined'){ MINPULSE=PARAMS.min_pulse; }
+        if(PARAMS && typeof PARAMS.max_pulse!=='undefined'){ MAXPULSE=PARAMS.max_pulse; }
+        if(PARAMS && typeof PARAMS.interval_time!=='undefined'){ INTERVALTIME=PARAMS.interval_time; }
+        if(PARAMS && typeof PARAMS.pos!=='undefined'){ CURRENTPOS=E.clip(PARAMS.pos*MAXPULSE,MINPULSE,MAXPULSE); }
+        
   
     return {
-        init:function(params, cb){  
+        init:function(cb){  
             var initResetSteps=10,
             that=this;
-    
-            if(typeof params.pin==='undefined'){ console.log('Servo Init Error - missing pin'); return false; }
-            if(typeof params.start_at!=='undefined'){params.pos=params.start_at;}
-            if(typeof params.is_at!=='undefined'){params.pos=params.is_at;}
-            if(typeof params.interval_time!='undefined'){intervalTime=params.interval_time;}
-            if(typeof params.init_steps!=='undefined'){initResetSteps=params.init_steps;}
-    
-            PIN=params.pin;
-    
-            var rPos=E.clip(params.pos*3,0,3);
-            CURRENTPOS=rPos;
 
-            if(typeof params.is_at==='undefined'){
-                INTERVAL=setInterval(function(){
-                    if(initResetSteps>0){
-                      digitalPulse(PIN,1,rPos);
-                      initResetSteps--;
-                    }else{
-                      that.stop();
-                      if(cb){ cb(); }
-                    }
-                }, INTERVALTIME);
-            }else{
-              if(cb){ cb(); }
-            }
+            INTERVAL=setInterval(function(){
+                if(initResetSteps>0){
+                    digitalPulse(PIN,1,CURRENTPOS);
+                    initResetSteps--;
+                }else{
+                    that.stop();
+                    if(cb){ cb(); }
+                }
+            }, INTERVALTIME);
         },
   
-        moveTo:function(pos, time, holdTime, cb){
-            var rPos=E.clip(pos*3,0,3).toFixed(2),
+        move:function(pos, time, holdTime, cb){
+            if(INTERVAL!==null){ if(cb){ cb({"success":false, "details":"servo currently active"}); } return; }
+            var rPos=E.clip(pos*MAXPULSE,MINPULSE,MAXPULSE).toFixed(2),
                 posDelta,
                 moveAmt=(1000/INTERVALTIME)*(time/1000),
                 that=this,
@@ -73,7 +67,7 @@ var servo = function() {
                     CURRENTPOS-=(posDelta/moveAmt);
                 }
       
-                CURRENTPOS=E.clip(parseFloat(CURRENTPOS.toFixed(2)),0,3);
+                CURRENTPOS=E.clip(parseFloat(CURRENTPOS.toFixed(2)),MINPULSE,MAXPULSE);
       
                 if((CURRENTPOS<rPos && direction==='cw') || (CURRENTPOS>rPos && direction==='ccw')){
                     digitalPulse(PIN,1,CURRENTPOS);
@@ -113,11 +107,9 @@ var servo = function() {
             }, INTERVALTIME);
         },
   
-        getPos:function(cb){ if(cb){ cb({"success":true, "pos":CURRENTPOS}); } },
+        getPos:function(){ return CURRENTPOS; },
 
-        stop:function(){ clearInterval(INTERVAL); }
+        stop:function(){ try{ clearInterval(INTERVAL); INTERVAL=null; }catch(e){ console.log('clearInterval Error'); } }
   
     };
 };
-
-exports = servo;
