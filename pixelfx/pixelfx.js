@@ -1,8 +1,26 @@
 exports.init = function(PIN, PIXELCNT) {
   let PULSECNT=0;
   
+  /*************************************************************
+   * FADER
+   * **********************************************************/
+    let fader={
+        "interval":null,
+        "stepsRemaining":0,
+        reset:function(){
+            if(typeof this.interval==='number'){
+                clearInterval(this.interval);
+                this.interval=null;
+            }
+            this.stepsRemaining=0;
+        }
+    };
+  
+  /*************************************************************
+   * BLINKER
+   * **********************************************************/
   let blinker={
-    "cnt":1,
+    "cnt":0,
     "rate_on":1,
     "rate_off":1,
     "pixel_colors":null,
@@ -11,25 +29,28 @@ exports.init = function(PIN, PIXELCNT) {
     "pixel_index":0,
     "on":false,
     "cb":null,
+    "timer":null,
     
     reset:function(){
-      this.cnt=1;
-      this.rate_on=1;
-      this.rate_off=1;
-      this.pixel_colors=null;
-      this.blink_fx='sync';
-      this.color_index=0;
-      this.pixel_index=0;
-      this.on=false;
-      this.cb=null;
-      
+        if(typeof this.timer==='number'){
+            clearTimeout(this.timer);
+            this.timer=null;
+        }
+        this.cnt=0;
+        this.rate_on=1;
+        this.rate_off=1;
+        this.pixel_colors=null;
+        this.blink_fx='sync';
+        this.color_index=0;
+        this.pixel_index=0;
+        this.on=false;
+        this.cb=null;
     },
     
     blink:function(){
       let pArray=new Uint8ClampedArray(PIXELCNT*3);
       
-     
-      if(this.cnt>=0){
+      if(this.cnt>0){
       
         switch(this.blink_fx){
           case 'random':
@@ -59,9 +80,11 @@ exports.init = function(PIN, PIXELCNT) {
           break;
         }
         
+        
         require("neopixel").write(PIN, pArray);
-        setTimeout(function(){ blinker.blink();}, 1000*((!blinker.on) ? blinker.rate_on : blinker.rate_off));
         this.cnt--;
+        blinker.timer=setTimeout(function(){ blinker.blink();}, 1000*((!blinker.on) ? blinker.rate_on : blinker.rate_off));
+        
         return true;
         
       }else{        
@@ -79,14 +102,36 @@ exports.init = function(PIN, PIXELCNT) {
   };
   
   return {
+      
+    /********************************************************
+       on 
+    ********************************************************/
+    on:function(color){
+        if(typeof color[0]!=='object'){ color=[color]; }
+        let pixels=new Uint8ClampedArray(PIXELCNT*3);
+        
+        let colorIndex=0;
+        for(var p=0; p<pixels.length; p+=3){
+            pixels[p]=color[colorIndex][0];
+            pixels[p+1]=color[colorIndex][1];
+            pixels[p+2]=color[colorIndex][2];
+    
+            colorIndex++;
+            if(colorIndex>=color.length){ colorIndex=0; }
+        }
+        
+        require("neopixel").write(PIN, pixels);
+    },
     
     /********************************************************
        off 
     ********************************************************/
     off:function(){
-      var pixels=new Uint8ClampedArray(PIXELCNT*3);
+      let pixels=new Uint8ClampedArray(PIXELCNT*3);
       
       blinker.reset();
+      blinker.cnt=0;
+      fader.reset();
       
       for(var p=0; p<pixels.length; p+=3){
           pixels[p]=0;
@@ -109,8 +154,8 @@ exports.init = function(PIN, PIXELCNT) {
       if(!params.time){params.time=1000;}
       
       
-      var interval=null,
-          speed=(1000/20)*(params.time/1000),
+      fader.interval=null;
+        let speed=(1000/20)*(params.time/1000),
 
           rStep=[],
           gStep=[],
@@ -118,9 +163,9 @@ exports.init = function(PIN, PIXELCNT) {
           R=[],
           G=[],
           B=[],
-          stepsRemaining=speed;
-          
           pixels=new Uint8ClampedArray(PIXELCNT*3);
+
+        fader.stepsRemaining=speed
           
       for(var p=0; p<params.to.length; p++){  
             rStep[p]=(params.to[p][0]-params.from[p][0])/speed;
@@ -131,7 +176,7 @@ exports.init = function(PIN, PIXELCNT) {
             B[p]=params.from[p][2];
       }
       
-      var fromColorIndex=0;
+      let fromColorIndex=0;
       for(var p=0; p<pixels.length; p+=3){
           pixels[p]=params.from[fromColorIndex][0];
           pixels[p+1]=params.from[fromColorIndex][1];
@@ -143,7 +188,7 @@ exports.init = function(PIN, PIXELCNT) {
           }
       }         
       
-      interval=setInterval(function(){
+      fader.interval=setInterval(function(){
         for(var p=0; p<params.to.length; p++){
           
           R[p]+=rStep[p];
@@ -151,7 +196,7 @@ exports.init = function(PIN, PIXELCNT) {
           B[p]+=bStep[p];          
         }
         
-        var colorIndex=0;
+        let colorIndex=0;
         for(var p=0; p<pixels.length; p+=3){
           pixels[p]=R[colorIndex];
           pixels[p+1]=G[colorIndex];
@@ -163,12 +208,12 @@ exports.init = function(PIN, PIXELCNT) {
           }
         }         
         
-        if(stepsRemaining<=0){
-          clearInterval(interval);
+        if(fader.stepsRemaining<=0){
+          fader.reset();
           responder(cb,[true,null,"fade complete"]);
         }else{
           require("neopixel").write(PIN, pixels);
-          stepsRemaining--;
+          fader.stepsRemaining--;
         }
       },20);
     },
@@ -189,7 +234,7 @@ exports.init = function(PIN, PIXELCNT) {
       if(!params.time_in){params.time_in=1000;}
       if(!params.time_out){params.time_out=1000;}
       
-      var that=this;
+      let that=this;
       
       this.fade({
           "from":params.from,
@@ -224,7 +269,7 @@ exports.init = function(PIN, PIXELCNT) {
       
       if(!params.rate){params.rate=1;}
       
-      var that=this,
+      let that=this,
           firstBeatToColor=[],
           secondBeatToColor=[];
       
@@ -261,12 +306,12 @@ exports.init = function(PIN, PIXELCNT) {
     ********************************************************/
     blink:function(params,cb){
       blinker.reset();
+      
       if(!params.color){ responder(cb,[false,null,"missing heartbeat color"]); return;} 
       if(typeof params.color[0]!=='object'){ params.color=[params.color]; }
 
       if(!params.cnt){params.cnt=1;}
-      blinker.cnt=params.cnt*2;
-
+      
       if(params.rate){ blinker.rate_on=params.rate; blinker.rate_off=params.rate;}else{
         if(!params.rate_on){params.rate_on=1;}
         blinker.rate_on=params.rate_on;
@@ -281,15 +326,24 @@ exports.init = function(PIN, PIXELCNT) {
       if(!params.blink_fx){params.blink_fx="sync";}
       blinker.blink_fx=params.blink_fx;
       
+        switch(params.blink_fx){
+            case 'sync':
+                blinker.cnt=params.cnt*2;
+            break;
+            case 'sequence':
+                blinker.cnt=params.cnt*PIXELCNT;
+            break;
+        }
+      
       if(cb){ blinker.cb=cb;}
 
       
       
-      var interval=null,      
+      let interval=null,      
           pixels=new Uint8ClampedArray(PIXELCNT*3);
       
       //We want to fill all the colors if the amount of color set in is less than the cnt of pixels
-      var colorIndex=0;
+      let colorIndex=0;
       for(var p=0; p<pixels.length; p+=3){
         pixels[p]=params.color[colorIndex][0];
         pixels[p+1]=params.color[colorIndex][1];
