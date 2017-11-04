@@ -21,7 +21,7 @@ Set the pin your servo is connected to
 
  - **min_pulse** - Set the minimum pulse width for your servo in milliseconds. For example the TowerPro sg90 seems to have a min pulse width of 500µs or 0.5ms
  - **max_pulse** - Set the maximum pulse width for your servo in milliseconds. For example the TowerPro sg90 seems to have a max pulse width of 2400µs or 2.4ms
- - **pos** - The starting point the servo will move to when you call the init function.
+ - **pos** - A number between 0 and 1. The starting point the servo will move to when you call the init function.
  
 ```
 var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servo/servo.min.js').connect(A0,{
@@ -80,6 +80,8 @@ servo.getPos();
 
 Demo
 --------------
+
+```
 var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servo/servo.min.js').connect(A0,{"min_pulse":0.5, "max_pulse":2.5, "pos":0.5});
 
 servo.init(function(){
@@ -91,3 +93,4 @@ servo.init(function(){
     });
   });
 });
+```
