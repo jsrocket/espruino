@@ -33,11 +33,11 @@ pixelfx.off();
 ### blink(params, callback)
 
 #### Params
-  **cnt** - (default: 1) - The number of times the pixels should blink.
-  **time_on** - (default: 1000) - The length of time in milliseconds that the pixel should stay on during a blink.
-  **time_off** - (default: 1000) -The length of time in milliseconds that the pixel should stay off during a blink.
-  **color**: - 
-  **blink_fx** (default: sync)  sync | sequence
+  - **cnt** - (default: 1) - The number of times the pixels should blink.
+  - **time_on** - (default: 1000) - The length of time in milliseconds that the pixel should stay on during a blink.
+  - **time_off** - (default: 1000) -The length of time in milliseconds that the pixel should stay off during a blink.
+  - **color**: - 
+  - **blink_fx** (default: sync)  sync | sequence
     - sync
     - sequence
   
