@@ -40,8 +40,8 @@ pixelfx.off();
   - **cnt** - (default: 1) - The number of times the pixels should blink.
   - **time_on** - (default: 1000) - The length of time in milliseconds that the pixel should stay on during a blink.
   - **time_off** - (default: 1000) -The length of time in milliseconds that the pixel should stay off during a blink.
-  - **color**: - To set a single color for all pixels pass in an array containing the RGB values.  If you wish to specify a different color for each pixel, pass in an array of arrays. In the example code below, if you have three pixels, they will each be set to a different color.  If you have more than three pixels, the pattern passed in will repeat to illuminate all LEDs.
-  - **blink_fx** (default: sync)  sync | sequence
+  - **color** - To set a single color for all pixels pass in an array containing the RGB values.  If you wish to specify a different color for each pixel, pass in an array of arrays. In the example code below, if you have three pixels, they will each be set to a different color.  If you have more than three pixels, the pattern passed in will repeat to illuminate all LEDs.
+  - **blink_fx** - (default: sync) - sync | sequence
     - sync
     - sequence
   
