@@ -22,6 +22,8 @@ If you wish to specify a different color for each pixel, pass in an array of arr
 pixelfx.on([[255,0,0],[0,50,0],[0,0,30]]);
 ```
 
+--------------------------------------------------
+
 
 ### off()
 Turns all pixels off.
@@ -29,6 +31,8 @@ Turns all pixels off.
 ```
 pixelfx.off();
 ```
+
+----------------------------------------------------
 
 ### blink(params, callback)
 
@@ -51,6 +55,7 @@ pixelfx.off();
   }, function(r){ console.log(r); });
   
   ```
+-------------------------------------------------------
 
 ### pulse
 
