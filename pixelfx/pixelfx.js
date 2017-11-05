@@ -21,8 +21,8 @@ exports.init = function(PIN, PIXELCNT) {
    * **********************************************************/
   let blinker={
     "cnt":0,
-    "rate_on":1,
-    "rate_off":1,
+    "time_on":1000,
+    "time_off":1000,
     "pixel_colors":null,
     "blink_fx":'sync',
     "color_index":0,
@@ -37,8 +37,8 @@ exports.init = function(PIN, PIXELCNT) {
             this.timer=null;
         }
         this.cnt=0;
-        this.rate_on=1;
-        this.rate_off=1;
+        this.time_on=1000;
+        this.time_off=1000;
         this.pixel_colors=null;
         this.blink_fx='sync';
         this.color_index=0;
@@ -83,7 +83,7 @@ exports.init = function(PIN, PIXELCNT) {
         
         require("neopixel").write(PIN, pArray);
         this.cnt--;
-        blinker.timer=setTimeout(function(){ blinker.blink();}, 1000*((!blinker.on) ? blinker.rate_on : blinker.rate_off));
+        blinker.timer=setTimeout(function(){ blinker.blink();}, ((!blinker.on) ? blinker.time_on : blinker.time_off));
         
         return true;
         
@@ -312,12 +312,12 @@ exports.init = function(PIN, PIXELCNT) {
 
       if(!params.cnt){params.cnt=1;}
       
-      if(params.rate){ blinker.rate_on=params.rate; blinker.rate_off=params.rate;}else{
-        if(!params.rate_on){params.rate_on=1;}
-        blinker.rate_on=params.rate_on;
+      if(params.rate){ blinker.time_on=params.rate; blinker.time_off=params.rate;}else{
+        if(!params.time_on){params.time_on=1000;}
+        blinker.time_on=params.time_on;
 
-        if(!params.rate_off){params.rate_off=1;}
-        blinker.rate_off=params.rate_off;
+        if(!params.time_off){params.time_off=1000;}
+        blinker.time_off=params.time_off;
       }
 
       if(!params.color_fx){params.color_fx="set";}
