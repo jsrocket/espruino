@@ -42,8 +42,8 @@ pixelfx.off();
   - **time_off** - (default: 1000) -The length of time in milliseconds that the pixel should stay off during a blink.
   - **color** - To set a single color for all pixels pass in an array containing the RGB values.  If you wish to specify a different color for each pixel, pass in an array of arrays. In the example code below, if you have three pixels, they will each be set to a different color.  If you have more than three pixels, the pattern passed in will repeat to illuminate all LEDs.
   - **blink_fx** - (default: sync) - sync | sequence
-    - sync
-    - sequence
+    - **sync** - All pixels will blink at the same time.  
+    - **sequence** - Each pixel will blink in sqeuence one at a time.
   
   ```
   p.blink({
@@ -52,6 +52,19 @@ pixelfx.off();
     'time_off':100,
     'color':[[0,50,0],[50,0,0],[0,0,50]], 
     'blink_fx':'sync'
+  }, function(r){ console.log(r); });
+  
+  ```
+  
+  In the example below each pixel will blink on and off for 100ms. If you have a NeoPixel ring you will see each of the 16 or so pixels light up in sequence and cycle around the ring 2 times as set by the "cnt" parameter. 
+  
+   ```
+  p.blink({
+    'cnt':2,
+    'time_on':100,
+    'time_off':100,
+    'color':[[50,0,0]], 
+    'blink_fx':'sequence'
   }, function(r){ console.log(r); });
   
   ```
