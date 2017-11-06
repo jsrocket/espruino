@@ -119,3 +119,24 @@ pixelfx.pulse({
 ---------------------------------------------
 
 ### heartbeat(params, callback)
+
+#### Params
+ - **color** - The color array of the pixels heartbeat.
+ - **rate** - (optional) A number you can send in to speed up or slow down the rate of the heartbeat.  The default is 1.
+ - **cnt** - The number of heartbeats to perform. 
+
+```
+pixelfx.heartbeat({
+  "color":[30,0,0],
+  "cnt":5
+},function(r){});
+```
+
+In the example below, the pixels will beat at half the rate as the default. 
+```
+pixelfx.heartbeat({
+  "color":[30,0,0],
+  "rate":0.5
+  "cnt":5
+},function(r){});
+```
