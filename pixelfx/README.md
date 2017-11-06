@@ -78,7 +78,7 @@ pixelfx.off();
  - **time** - The time in milliseconds the pixels will take to fade from the "from" color to the "to" color.
 
 In this example, all pixels will fade from red to blue over a period of 2 seconds.
-````
+```
 pixelfx.fade({
   "from":[10,0,0],
   "to":[0,0,10],
@@ -93,7 +93,7 @@ pixelfx.fade({
   "to":[[10,0,0],[0,0,10]],
   "time":5000
 },function(r){  });
-````
+```
 
 -------------------------------------------------------
 
