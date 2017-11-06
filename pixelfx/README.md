@@ -70,11 +70,11 @@ pixelfx.off();
   ```
 -------------------------------------------------------
 
-### fade
+### fade(params, callback)
 
 #### Params
  - **from** - The color array the pixels will start at.
- - **to** - - The color array the pixels will end at.
+ - **to** - The color array the pixels will end at.
  - **time** - The time in milliseconds the pixels will take to fade from the "from" color to the "to" color.
 
 In this example, all pixels will fade from red to blue over a period of 2 seconds.
@@ -99,6 +99,23 @@ pixelfx.fade({
 
 ### pulse(params, callback)
 
+#### Params
+ - **from** - The color array the pixels will start at.
+ - **to** -  The color array the pixels will end at.
+ - **time_in** - The time in milliseconds the pixels will take to pulse **in** from the "from" color to the "to" color.
+ - **time_out** - The time in milliseconds the pixels will take to pulse **out** from the "from" color to the "to" color.
+ - **cnt** - The number of pulses. 
 
+```
+pixelfx.pulse({
+  "from":[[0,0,0],[0,0,0]],
+  "to":[[10,1,10],[5,100,7]],
+  "time_in":2000,
+  "time_out":100,
+  "cnt":5
+},function(r){ });
+```
 
-### heartbeat
+---------------------------------------------
+
+### heartbeat(params, callback)
