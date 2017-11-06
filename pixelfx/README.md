@@ -46,7 +46,7 @@ pixelfx.off();
     - **sequence** - Each pixel will blink in sqeuence one at a time.
   
   ```
-  p.blink({
+  pixelfx.blink({
     'cnt':5,
     'time_on':1000,
     'time_off':100,
@@ -59,7 +59,7 @@ pixelfx.off();
   In the example below each pixel will blink on and off for 100ms. If you have a NeoPixel ring you will see each of the 16 or so pixels light up in sequence and cycle around the ring 2 times as set by the "cnt" parameter. 
   
    ```
-  p.blink({
+  pixelfx.blink({
     'cnt':2,
     'time_on':100,
     'time_off':100,
@@ -70,8 +70,35 @@ pixelfx.off();
   ```
 -------------------------------------------------------
 
-### pulse
-
 ### fade
+
+#### Params
+ - **from** - The color array the pixels will start at.
+ - **to** - - The color array the pixels will end at.
+ - **time** - The time in milliseconds the pixels will take to fade from the "from" color to the "to" color.
+
+In this example, all pixels will fade from red to blue over a period of 2 seconds.
+````
+pixelfx.fade({
+  "from":[10,0,0],
+  "to":[0,0,10],
+  "time":2000
+},function(r){  });
+```
+
+In this example, all pixels will alternate the fade colors red, blue, red, blue, etc... They will all fade from off to either red to blue over a period of 5 seconds.
+```
+pixelfx.fade({
+  "from":[[0,0,0],[0,0,0]],
+  "to":[[10,0,0],[0,0,10]],
+  "time":5000
+},function(r){  });
+````
+
+-------------------------------------------------------
+
+### pulse(params, callback)
+
+
 
 ### heartbeat
