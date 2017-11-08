@@ -1,6 +1,6 @@
-/* Copyright (c) 2017 Ken Kozaczka. See the file LICENSE for copying permission. */
-/*
-    Yet another servo module. Yes, I know it's pretty verbose but I'm not too worried about that and I will address that if space becomes an issue. 
+/* See the file LICENSE for copying permission. 
+   
+   Yet another servo module. Yes, I know it's pretty verbose but I'm not too worried about that and I will address that if space becomes an issue. 
 */
 
 exports.connect = function (PPIN, PARAMS) {
@@ -34,7 +34,8 @@ exports.connect = function (PPIN, PARAMS) {
         },
   
         move:function(pos, time, holdTime, cb){
-            if(INTERVAL!==null){ if(cb){ cb({"success":false, "details":"servo currently active"}); } return; }
+            if(INTERVAL!==null){ this.stop(); }
+            
             var rPos=E.clip(pos*MAXPULSE,MINPULSE,MAXPULSE).toFixed(2),
                 posDelta,
                 moveAmt=(1000/INTERVALTIME)*(time/1000),
@@ -75,7 +76,10 @@ exports.connect = function (PPIN, PARAMS) {
                     that.stop();
                     CURRENTPOS=rPos;
         
-                    if(holdTime>0){
+                    if(holdTime===true){
+                        that.holdPos(holdTime, cb);
+                        if(cb){ cb({"success":true, "pos":CURRENTPOS}); }
+                    }else if(holdTime>0){
                       that.holdPos(holdTime, cb);
                     }else{
                       if(cb){ cb({"success":true, "pos":CURRENTPOS}); }
@@ -97,7 +101,7 @@ exports.connect = function (PPIN, PARAMS) {
         
             INTERVAL=setInterval(function(){
                 heldFor+=INTERVALTIME;
-                if(heldFor>=time){
+                if(heldFor>=time && time!==true){
                     that.stop();
                     if(cb){ cb({"success":true, "pos":CURRENTPOS}); }
                     return true;
@@ -107,7 +111,7 @@ exports.connect = function (PPIN, PARAMS) {
             }, INTERVALTIME);
         },
   
-        getPos:function(){ return CURRENTPOS; },
+        getPos:function(){ return parseFloat((CURRENTPOS/MAXPULSE).toFixed(2)); },
 
         stop:function(){ try{ clearInterval(INTERVAL); INTERVAL=null; }catch(e){ console.log('clearInterval Error'); } }
   
