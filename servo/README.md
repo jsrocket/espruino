@@ -94,3 +94,9 @@ servo.init(function(){
   });
 });
 ```
+
+Example JS File
+--------------
+You can load this JS file into the Espruino Web IDE to see how it works.
+
+https://github.com/jsrocket/espruino/blob/master/servo/example.js
