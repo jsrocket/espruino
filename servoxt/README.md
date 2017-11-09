@@ -24,7 +24,7 @@ Set the pin your servo is connected to
  - **pos** - A number between 0 and 1. The starting point the servo will move to when you call the init function.
  
 ```
-var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servo/servo.min.js').connect(A0,{
+var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servoxt/servoxt.min.js').connect(A0,{
  "min_pulse":0.5, 
  "max_pulse":2.5, 
  "pos":0.5
@@ -82,7 +82,7 @@ Demo
 --------------
 
 ```
-var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servo/servo.min.js').connect(A0,{"min_pulse":0.5, "max_pulse":2.5, "pos":0.5});
+var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servoxt/servoxt.min.js').connect(A0,{"min_pulse":0.5, "max_pulse":2.5, "pos":0.5});
 
 servo.init(function(){
   servo.move(0, 2000,0, function(){
@@ -99,4 +99,4 @@ Example JS File
 --------------
 You can load this JS file into the Espruino Web IDE to see how it works.
 
-https://github.com/jsrocket/espruino/blob/master/servo/example.js
+https://github.com/jsrocket/espruino/blob/master/servoxt/example.js
