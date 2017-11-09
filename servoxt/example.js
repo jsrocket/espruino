@@ -1,4 +1,4 @@
-var servo=require('https://github.com/jsrocket/espruino/blob/master/servo/servo.min.js').connect(A0,{"min_pulse":0.3, "max_pulse":2.5, "pos":0, "interval_time":20});
+var servo=require('https://github.com/jsrocket/espruino/blob/master/servoxt/servoxt.min.js').connect(A0,{"min_pulse":0.3, "max_pulse":2.5, "pos":0, "interval_time":20});
 
 
 servo.init(function(){
