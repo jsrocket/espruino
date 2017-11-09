@@ -1,4 +1,4 @@
-Servo Module
+ServoXT Module
 ===========
 
 I built this module initially because I could not get my servos to rotate to complete 0 or 180 degrees. They would always stop short no matter the brand I used. 
