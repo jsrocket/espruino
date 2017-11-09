@@ -47,7 +47,7 @@ servo.init(function(){
 
  - **pos** - A number between 0 and 1. The position you want the servo to move to.
  - **time** - The length of time in milliseconds that the servo should take to move to the desired position.
- - **hold** - The length of time in milliseconds the servo should stay powered on and activly "hold" the current position. 
+ - **hold** - The length of time in milliseconds the servo should stay powered on and activly "hold" the current position. If set to **true** the servo will hold the position indefinitely until you call() the move() or stop method. 
  - **callback** - Will be fired once the servo has completed it's motion. 
  
 ```
@@ -64,18 +64,18 @@ servo.move(1, 500, 2500, function(res){
  
 ### stop()
 
-Calling this will cause the servo to stop at it's current position
+Calling this will cause the servo to stop at it's current position.
 
 ```
 servo.stop();
 ```
 
-### getPos
+### getPos()
 
 This will return the current position of the servo.
 
 ```
-servo.getPos();
+var servoPosition = servo.getPos();
 ```
 
 Demo
