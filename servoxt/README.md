@@ -7,7 +7,6 @@ I built this module initially because I could not get my servos to rotate to com
  - The ability for the servo to hold a certain position before turning off
  - The ability to stop the servo motion
  - A function to get the current position the servo thinks it's at.
- - Setting the position of the servo using degrees vs a number 0 thru 1.
 
 Methods
 --------------
@@ -20,13 +19,13 @@ Set the pin your servo is connected to
 
  - **min_pulse** - Set the minimum pulse width for your servo in milliseconds. For example the TowerPro sg90 seems to have a min pulse width of 500µs or 0.5ms
  - **max_pulse** - Set the maximum pulse width for your servo in milliseconds. For example the TowerPro sg90 seems to have a max pulse width of 2400µs or 2.4ms
- - **pos** - A number between 0 and 180. The starting point the servo will move to when you call the init function.
+ - **pos** - A number between 0 and 1. The starting point the servo will move to when you call the init function.
  
 ```
 var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servoxt/servoxt.min.js').connect(A0,{
  "min_pulse":0.5, 
  "max_pulse":2.5, 
- "pos":90
+ "pos":0.5
 });
 ```
  
@@ -44,19 +43,19 @@ servo.init(function(){
 
 ### move(pos, time, hold, callback)
 
- - **pos** - A number between 0 and 180. The position you want the servo to move to.
+ - **pos** - A number between 0 and 1. The position you want the servo to move to.
  - **time** - The length of time in milliseconds that the servo should take to move to the desired position.
  - **hold** - The length of time in milliseconds the servo should stay powered on and activly "hold" the current position. If set to **true** the servo will hold the position indefinitely until you call() the move() or stop method. 
  - **callback** - Will be fired once the servo has completed it's motion. 
  
 ```
 //This will cause the servo to take 2s to move to the midpoint. It will not activly hold the position.
-servo.move(90, 2000, 0, function(res){
+servo.move(0.5, 2000, 0, function(res){
   console.log(res);
 });
 
 //This will cause the servo to take half a second to move to the extreme counter-clockwise position and activly hold it for 2.5 seconds.
-servo.move(180, 500, 2500, function(res){
+servo.move(1, 500, 2500, function(res){
   console.log(res);
 });
 ```
@@ -81,13 +80,13 @@ Demo
 --------------
 
 ```
-var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servoxt/servoxt.min.js').connect(A0,{"min_pulse":90, "max_pulse":2.5, "pos":0.5});
+var servo=require('https://raw.githubusercontent.com/jsrocket/espruino/master/servoxt/servoxt.min.js').connect(A0,{"min_pulse":0.5, "max_pulse":2.5, "pos":0.5});
 
 servo.init(function(){
-  servo.move(0, 2000,0, function(){
-    servo.move(180, 2000,0, function(){
-      servo.move(60, 2000,0, function(){
-        servo.move(90, 1000,0, function(){});
+  servo.move(0, 400,0, function(){
+    servo.move(1, 400,0, function(){
+      servo.move(0.4, 400,0, function(){
+        servo.move(0.5, 100,0, function(){});
       });
     });
   });
