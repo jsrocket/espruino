@@ -18,10 +18,10 @@ EXAMPLE 1: Lets move the servo to the midpoint.
 ===============================================
 
 
-EXAMPLE 2: Lets move the servo back to 0 and then back to the midpoint.
+EXAMPLE 2: Lets move the servo back to 0 and then back to the midpoint. Then actively hold the position at the midpoint until you call .stop() or .move() again.
 
   servo.move(0, 500, 0, function(){ 
-    servo.move(0.5, 500, 0); 
+    servo.move(0.5, 500, true); 
   });
 
 
