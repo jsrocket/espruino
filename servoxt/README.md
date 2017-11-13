@@ -54,13 +54,14 @@ servo.move(0.5, 2000, 0, function(res){
   console.log(res);
 });
 
+
 //This will cause the servo to take half a second to move to the extreme counter-clockwise position and activly hold it for 2.5 seconds.
 servo.move(1, 500, 2500, function(res){
   console.log(res);
 });
 
-//This will cause the servo to take half a second to move to the mid-point and hold the position until you call the stop() or move() function.
 
+//This will cause the servo to take half a second to move to the mid-point and hold the position until you call the stop() or move() function.
 servo.move(0.5, 500, true, function(res){
   console.log(res);
 });
