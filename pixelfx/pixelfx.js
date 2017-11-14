@@ -9,7 +9,7 @@ exports.init = function(PIN, PIXELCNT) {
         "stepsRemaining":0,
         reset:function(){
             if(typeof this.interval==='number'){
-                clearInterval(this.interval);
+               try{ clearInterval(this.interval); }catch(e){}
                 this.interval=null;
             }
             this.stepsRemaining=0;
@@ -33,7 +33,7 @@ exports.init = function(PIN, PIXELCNT) {
     
     reset:function(){
         if(typeof this.timer==='number'){
-            clearTimeout(this.timer);
+            try{ clearTimeout(this.timer); }catch(e){}
             this.timer=null;
         }
         this.cnt=0;
