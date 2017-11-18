@@ -61,8 +61,8 @@ pixelfx.off();
    ```
   pixelfx.blink({
     'cnt':2,
-    'time_on':100,
-    'time_off':100,
+    'time_on':10,
+    'time_off':10,
     'color':[[50,0,0]], 
     'blink_fx':'sequence'
   }, function(r){ console.log(r); pixelfx.off(); });
