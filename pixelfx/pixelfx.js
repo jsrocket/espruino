@@ -1,5 +1,6 @@
 exports.init = function(PIN, PIXELCNT) {
-  let PULSECNT=0;
+  let PULSECNT=0,
+    NEOPIXEL=require("neopixel");
   
   /*************************************************************
    * FADER
@@ -81,7 +82,7 @@ exports.init = function(PIN, PIXELCNT) {
         }
         
         
-        require("neopixel").write(PIN, pArray);
+        NEOPIXEL.write(PIN, pArray);
         this.cnt--;
         blinker.timer=setTimeout(function(){ blinker.blink();}, ((!blinker.on) ? blinker.time_on : blinker.time_off));
         
@@ -120,7 +121,7 @@ exports.init = function(PIN, PIXELCNT) {
             if(colorIndex>=color.length){ colorIndex=0; }
         }
         
-        require("neopixel").write(PIN, pixels);
+        NEOPIXEL.write(PIN, pixels);
     },
     
     /********************************************************
@@ -138,7 +139,7 @@ exports.init = function(PIN, PIXELCNT) {
           pixels[p+1]=0;
           pixels[p+2]=0;
       }
-      require("neopixel").write(PIN, pixels);
+      NEOPIXEL.write(PIN, pixels);
     },
     
     /********************************************************
@@ -212,7 +213,7 @@ exports.init = function(PIN, PIXELCNT) {
           fader.reset();
           responder(cb,[true,null,"fade complete"]);
         }else{
-          require("neopixel").write(PIN, pixels);
+          NEOPIXEL.write(PIN, pixels);
           fader.stepsRemaining--;
         }
       },20);
