@@ -150,3 +150,32 @@ pixelfx.heartbeat({
 },function(r){ pixelfx.off(); });
 ```
 
+-----------------------------
+
+Demo
+--------
+
+In the demo below you can see that the init function is being told that the neopixels are on pin B15 and there are 16 of them.  Adjust those two values to match your setup.
+
+```
+var pixelfx=require('https://github.com/jsrocket/espruino/blob/master/pixelfx/pixelfx.min.js').init(B15, 16);
+
+pixelfx.blink({
+    'cnt':2,
+    'time_on':10,
+    'time_off':10,
+    'color':[[50,0,0]], 
+    'blink_fx':'sequence'
+  }, function(r){
+
+    pixelfx.blink({
+      'cnt':5,
+      'time_on':100,
+      'time_off':100,
+      'color':[[0,50,0],[50,0,0],[0,0,50]], 
+      'blink_fx':'sync'
+    }, function(r){ console.log(r); pixelfx.off(); });
+  
+});
+
+```
