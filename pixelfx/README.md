@@ -48,11 +48,11 @@ pixelfx.off();
   ```
   pixelfx.blink({
     'cnt':5,
-    'time_on':1000,
+    'time_on':100,
     'time_off':100,
     'color':[[0,50,0],[50,0,0],[0,0,50]], 
     'blink_fx':'sync'
-  }, function(r){ console.log(r); });
+  }, function(r){ console.log(r); pixelfx.off(); });
   
   ```
   
@@ -65,7 +65,7 @@ pixelfx.off();
     'time_off':100,
     'color':[[50,0,0]], 
     'blink_fx':'sequence'
-  }, function(r){ console.log(r); });
+  }, function(r){ console.log(r); pixelfx.off(); });
   
   ```
 -------------------------------------------------------
@@ -86,11 +86,11 @@ pixelfx.fade({
 },function(r){  });
 ```
 
-In this example, all pixels will alternate the fade colors red, blue, red, blue, etc... They will all fade from off to either red to blue over a period of 5 seconds.
+In this example, all pixels will alternate the fade colors red, green, blue, red, green, blue, etc... They will all fade from off to either red, green or blue over a period of 5 seconds.
 ```
 pixelfx.fade({
-  "from":[[0,0,0],[0,0,0]],
-  "to":[[10,0,0],[0,0,10]],
+  "from":[[0,0,0],[0,0,0],[0,0,0]],
+  "to":[[100,0,0],[0,100,0],[0,0,100]],
   "time":5000
 },function(r){  });
 ```
@@ -129,14 +129,24 @@ pixelfx.pulse({
 pixelfx.heartbeat({
   "color":[30,0,0],
   "cnt":5
-},function(r){});
+},function(r){ pixelfx.off(); });
 ```
 
 In the example below, the pixels will beat at half the rate as the default. 
 ```
 pixelfx.heartbeat({
   "color":[30,0,0],
-  "rate":0.5
+  "rate":0.5,
   "cnt":5
-},function(r){});
+},function(r){ pixelfx.off(); });
 ```
+
+In the example below, the pixels will beat twice as fast in one of two colors. 
+```
+pixelfx.heartbeat({
+  "color":[[30,0,0],[0,30,0]],
+  "rate":2,
+  "cnt":5
+},function(r){ pixelfx.off(); });
+```
+
