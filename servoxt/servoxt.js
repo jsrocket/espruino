@@ -19,7 +19,7 @@ exports.connect = function (PPIN, PARAMS) {
   
     return {
         init:function(cb){  
-            var initResetSteps=10,
+            var initResetSteps=30,
             that=this;
 
             INTERVAL=setInterval(function(){
