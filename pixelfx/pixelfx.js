@@ -25,6 +25,7 @@ exports.init = function(PIN, PIXELCNT) {
     "time_on":1000,
     "time_off":1000,
     "pixel_colors":null,
+    "pixel_off":new Uint8ClampedArray(PIXELCNT*3),
     "blink_fx":'sync',
     "color_index":0,
     "pixel_index":0,
@@ -70,14 +71,12 @@ exports.init = function(PIN, PIXELCNT) {
             
           break;
           default: //sync
-            for(var p=0; p<pArray.length; p+=3){
-              pArray[p]=((this.on) ? this.pixel_colors[p] : 0);
-              pArray[p+1]=((this.on) ? this.pixel_colors[p+1] : 0);
-              pArray[p+2]=((this.on) ? this.pixel_colors[p+2] : 0);         
-            }
-
             this.on=!this.on;
-            
+            if(this.on){
+                pArray=this.pixel_colors;
+            }else{
+                pArray=blinker.pixel_off;
+            }
           break;
         }
         
