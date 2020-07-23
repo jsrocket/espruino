@@ -51,3 +51,9 @@ Same as the get, except now you are passing in the value as the second parameter
 ```
 myDevice.variable("VARIABLE-NAME",NEW-VALUE).then(r=>{ console.log(r); });
 ```
+
+### Call On-device Function
+You can pass in an optional parameter to your function of any JS data type. The promise returns the value of the functions return.
+```
+myDevice.function("FUNCTION-NAME", [OPTIONAL-PARAM]).then(r=>{ console.log(r); });
+```
