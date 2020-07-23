@@ -36,29 +36,57 @@ let myDevice = Object.create(deviceRC);
 ```
 
 ### 3. Connect to the websocket server
+
+**Parameters**
+ - Device Name: - An identifier that matches the value entered in your Espurino program.
+ - Server: - The address and port for your websocket server.
+
+**Returns**
+A boolean value. True if connected, False if disconnected.
+
 ```
-myDevice.connect("YOUR-DEVICE-NAME","ws://YOUR-SERVER:YOUR-PORT").then(()=>{
+myDevice.connect("DEVICE-NAME","ws://YOUR-SERVER:YOUR-PORT").then((connected)=>{
   // ... the rest of your code in here.
 });
 ```
+
 ## Browser Methods
 
 ### Get On-device Variables
-The promise returns the variable value
+
+**Parameters**
+ - Variable Name: - The name of the variable defined in your Espruino program.
+
+**Returns**
+The value of the variable.
+
 ```
 myDevice.variable("VARIABLE-NAME").then(r=>{ console.log(r); });
 ```
 
 ### Set On-device Variables
-Same as the get, except now you are passing in the value as the second parameter. The promise retuns TRUE if successful or FALSE if the variable does not exist.
+**Parameters**
+ - Variable Name: - The name of the variable defined in your Espruino program.
+ - Value: - The new value to set the variable to. Can be any valid type.
+
+**Returns**
+True if successful. False if the variable does not exist.
+
 ```
-myDevice.variable("VARIABLE-NAME",NEW-VALUE).then(r=>{ console.log(r); });
+myDevice.variable("VARIABLE-NAME",VALUE).then(r=>{ console.log(r); });
 ```
 
 ### Call On-device Functions
-You can pass in an optional parameter to your function of any JS data type. The promise returns the value of the functions return.
+
+**Parameters**
+ - Function Name: - The name of the function defined in your Espruino program.
+ - Arg: (optional) - Whatever is set here will be passed into your function.
+
+**Returns**
+True if successful. False if the variable does not exist.
+
 ```
-myDevice.function("FUNCTION-NAME", [OPTIONAL-PARAM]).then(r=>{ console.log(r); });
+myDevice.function("FUNCTION-NAME", ARG).then(r=>{ console.log(r); });
 ```
 
 ### Execute New Javascript On-device
