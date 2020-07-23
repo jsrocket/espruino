@@ -42,7 +42,7 @@ let myDevice = Object.create(deviceRC);
  - Server: - The address and port for your websocket server.
 
 **Returns**
-A boolean value. True if connected, False if disconnected.
+ - A boolean value. True if connected, False if disconnected.
 
 ```
 myDevice.connect("DEVICE-NAME","ws://YOUR-SERVER:YOUR-PORT").then((connected)=>{
@@ -58,7 +58,7 @@ myDevice.connect("DEVICE-NAME","ws://YOUR-SERVER:YOUR-PORT").then((connected)=>{
  - Variable Name: - The name of the variable defined in your Espruino program.
 
 **Returns**
-The value of the variable.
+ - The value of the variable.
 
 ```
 myDevice.variable("VARIABLE-NAME").then(r=>{ console.log(r); });
@@ -70,7 +70,7 @@ myDevice.variable("VARIABLE-NAME").then(r=>{ console.log(r); });
  - Value: - The new value to set the variable to. Can be any valid type.
 
 **Returns**
-True if successful. False if the variable does not exist.
+ - True if successful. False if the variable does not exist.
 
 ```
 myDevice.variable("VARIABLE-NAME",VALUE).then(r=>{ console.log(r); });
@@ -83,24 +83,37 @@ myDevice.variable("VARIABLE-NAME",VALUE).then(r=>{ console.log(r); });
  - Arg: (optional) - Whatever is set here will be passed into your function.
 
 **Returns**
-True if successful. False if the variable does not exist.
+ - The return value of the function called.
 
 ```
 myDevice.function("FUNCTION-NAME", ARG).then(r=>{ console.log(r); });
 ```
 
 ### Execute New Javascript On-device
-You can write and execute new JS code on your device from your browser. The first parameter is a unique id for the code block to be executed. This is simply to be used internally for associating the response to the proper request. 
+You can write and execute new JS code on your device from your browser. The code sent DOES NOT persist when the device is rebooted.
 
-The response value will be an empty string if the execution was successful or an error message if it failed.
+**Parameters**
+ - Unique ID: - An internal reference for associating the response to the proper request.
+ - Code Block: - The JS code to be executed on the Espruino
+ 
+**Returns**
+- An empty string on success.  An error message on failure.
 
 ```
 myDevice.exec("UNIQUE-ID", `CODE-BLOCK`).then(error =>{ console.log(error); });
 ```
 
 ### Register An On-device Watcher
-Monitor a variable or function return value.
+Monitor the value of a variable or function on a specific interval.
+
+**Parameters**
+ - Function or Variable Name: - The name of the function or variable present in your Espruino code.
+ - Interval: - The number of milliseconds to wait inbetween polling.
+ 
+**Returns**
+ - The value of the function or variable
+
 ```
-myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", POLL-INTERVAL).then(r=>{ console.log(r); });
+myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", INTERVAL).then(r=>{ console.log(r); });
 ```
 
