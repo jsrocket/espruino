@@ -148,8 +148,10 @@ myDevice.ping();
 
 ## Browser Events
 
+**NOTE** All events will contain the device identifier in the event.detail data parameter.
+
 ### Device Connects
-Fires when a device connects the websocket server. The event.detail contains the device identifier.
+Fires when a device connects the websocket server.
 
 ```
 window.addEventListener("connect",(evt)=>{
@@ -158,7 +160,7 @@ window.addEventListener("connect",(evt)=>{
 ```
 
 ### Device Disconnects
-Fires when a device disconnects from the websocket server. The event.detail contains the device identifier.
+Fires when a device disconnects from the websocket server.
 
 ```
 window.addEventListener("disconnect",(evt)=>{
@@ -166,3 +168,23 @@ window.addEventListener("disconnect",(evt)=>{
 });
 ```
 
+### Device Pong Response
+Fires when the device responds to a Ping request.
+
+```
+window.addEventListener("disconnect",(evt)=>{
+ console.log("connect", evt.detail);
+});
+```
+
+### Device Custom Event
+Trigger custom events that will respond to on-device events like button presses, sensor triggers or any other IO event.
+
+**Parameters**
+ - Event Name: - The event name matching the one set by you Espruino code when triggering the event.
+
+```
+window.addEventListener("EVENT-NAME",(evt)=>{
+ console.log("connect", evt.detail);
+});
+```
