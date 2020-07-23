@@ -117,3 +117,31 @@ Monitor the value of a variable or function on a specific interval.
 myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", INTERVAL).then(r=>{ console.log(r); });
 ```
 
+
+### Reboot The Espruino
+Allows you to trigger ```E.reboot()``` the the device.
+
+**Parameters**
+ - NA
+ 
+**Returns**
+ - NA
+
+```
+myDevice.reboot();
+```
+
+
+
+### Ping Espruino
+Sends a Ping request to the Espruino, which will respond with a Pong response if it is online.
+
+**Parameters**
+ - NA
+ 
+**Returns**
+ - NA
+
+```
+myDevice.ping();
+```
