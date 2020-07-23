@@ -10,6 +10,8 @@
 
 ----------------------------------------------
 
+# Websocket Server
+
 ## Install NodeJS Server
 
  1. Download the files in the ```/server``` directory
@@ -19,7 +21,13 @@
 
 **Note** - If you can't or don't want to run your own server, feel free to use my shared one at ```wss://shared.robotictheater.com:8080```. Be warned, it comes with no promises or guarantee of uptime.
 
+---------------------------------------------
+
+# Espruino Integration
+
 ----------------------------------------------
+
+# Browser Setup
 
 ## Include Browser JS File
 
