@@ -145,3 +145,24 @@ Sends a Ping request to the Espruino, which will respond with a Pong response if
 ```
 myDevice.ping();
 ```
+
+## Browser Events
+
+### Device Connects
+Fires when a device connects the websocket server. The event.detail contains the device identifier.
+
+```
+window.addEventListener("connect",(evt)=>{
+ console.log("connect", evt.detail);
+});
+```
+
+### Device Disconnects
+Fires when a device disconnects from the websocket server. The event.detail contains the device identifier.
+
+```
+window.addEventListener("disconnect",(evt)=>{
+ console.log("connect", evt.detail);
+});
+```
+
