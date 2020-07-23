@@ -25,9 +25,12 @@
 
 ### 1. Include the DeviceRC browser JS file
 
-
+``` 
+@TODO ADD URL HERE
+```
 
 ### 2. Create a new devivce
+You can control multiple devices from the same page. Just create a new object for each device you want to control.
 ```
 let myDevice = Object.create(deviceRC);
 ```
@@ -52,8 +55,24 @@ Same as the get, except now you are passing in the value as the second parameter
 myDevice.variable("VARIABLE-NAME",NEW-VALUE).then(r=>{ console.log(r); });
 ```
 
-### Call On-device Function
+### Call On-device Functions
 You can pass in an optional parameter to your function of any JS data type. The promise returns the value of the functions return.
 ```
 myDevice.function("FUNCTION-NAME", [OPTIONAL-PARAM]).then(r=>{ console.log(r); });
 ```
+
+### Execute New Javascript On-device
+You can write and execute new JS code on your device from your browser. The first parameter is a unique id for the code block to be executed. This is simply to be used internally for associating the response to the proper request. 
+
+The response value will be an empty string if the execution was successful or an error message if it failed.
+
+```
+myDevice.exec("UNIQUE-ID", `CODE-BLOCK`).then(error =>{ console.log(error); });
+```
+
+### Register An On-device Watcher
+Monitor a variable or function return value.
+```
+myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", POLL-INTERVAL).then(r=>{ console.log(r); });
+```
+
