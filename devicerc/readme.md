@@ -25,6 +25,51 @@
 
 # Espruino Integration
 
+## Connect To The Websocket Server
+Include the device javascript and call ```connect``` passing the following parameters.
+
+**Parameters**
+ - sid (required): Your WIFI's SID
+ - pwd (required): Your WIFI's password
+ - id (required): A unique device id
+ - server (required): The websocket server address
+ - port (required): The websocket server port
+ - disable (optional): An array containing a list of features to disable. Whatever is passed in will be be allowed to be called from the browser.
+   - getvariable
+   - setvariable
+   - function
+   - exec
+   - reboot
+   - watcher
+
+**Callback**
+The callback will fire anytime the connection status chnges. It will return True if connected and False if disconnected.
+
+```
+let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/device.min.js").connect({
+    "sid":"YOUR-WIFI-SID",
+    "pwd":"YOUR-WIFI-PASSWORD",
+     "id":"DEVICE-IDENTIFIER",
+     "server":"WEBSOCKET-SERVER",
+     "port":WEBSOCKET-PORT,
+     "disable":[]
+},(connected)=>{
+  if(connected){
+    
+  }
+});
+```
+
+## Firing Events
+
+**Parameters**
+ - Event Name: - The name/label of the event that will be referenced in the browsers event listener.
+ - Event Value: - The data to record along with the event.
+
+```
+deviceRC.event("EVENT-NAME", "EVENT-VALUE")
+```
+
 ----------------------------------------------
 
 # Browser Setup
@@ -46,14 +91,14 @@ let myDevice = Object.create(deviceRC);
 ### 3. Connect to the websocket server
 
 **Parameters**
- - Device Name: - An identifier that matches the value entered in your Espurino program.
+ - Device Identifier: - An identifier that matches the value entered in your Espurino program.
  - Server: - The address and port for your websocket server.
 
 **Returns**
  - A boolean value. True if connected, False if disconnected.
 
 ```
-myDevice.connect("DEVICE-NAME","ws://YOUR-SERVER:YOUR-PORT").then((connected)=>{
+myDevice.connect("DEVICE-IDENTIFIER","ws://YOUR-SERVER:YOUR-PORT").then((connected)=>{
   // ... the rest of your code in here.
 });
 ```
