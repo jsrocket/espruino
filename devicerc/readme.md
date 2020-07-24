@@ -30,7 +30,7 @@
 # Espruino Integration
 
 ## Connect To The Websocket Server
-Include the device javascript and call ```connect``` passing the following parameters.
+Include the deviceRC module and call ```connect``` passing the following parameters.
 
 **Parameters**
  - sid (required): Your WIFI's SID
@@ -213,6 +213,20 @@ Sends a Ping request to the Espruino, which will respond with a Pong response if
 
 ```
 myDevice.ping();
+```
+
+### Setting Event History Caps
+You can adjust the number of records the server holds in memory for each event.  The default value is one record per event
+
+**Parameters**
+ - Event Name: - The name of the event, matching the one set in your Espruino code.
+ - CNT: - The integer value indicating the number of event records to keep on the server and return to the event handler 
+ 
+**Returns**
+ - NA
+
+```
+myDevice.eventHistory("EVENT-NAME", CNT);
 ```
 
 ## Browser Events
