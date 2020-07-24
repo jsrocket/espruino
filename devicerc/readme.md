@@ -165,15 +165,28 @@ Monitor the value of a variable or function on a specific interval.
 
 **Parameters**
  - Function or Variable Name: - The name of the function or variable present in your Espruino code.
- - Interval: - The number of milliseconds to wait inbetween polling.
+ - Interval (integer): - The number of milliseconds to wait inbetween polling.
+ - History (integer): - The number of records to return when the watcher fires.  The default is 1.
  
 **Returns**
  - The value of the function or variable
 
 ```
-myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", INTERVAL).then(r=>{ console.log(r); });
+myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", INTERVAL, HISTORY).then(r=>{ console.log(r); });
 ```
 
+### Deregister An On-device Watcher
+Same as registering execpt you don't pass in any parameters besides the name which nulls out the interval timer.
+
+**Parameters**
+ - Function or Variable Name: - The name of the function or variable present in your Espruino code.
+ 
+**Returns**
+ - True | False
+
+```
+myDevice.watcher("FUNCTION-OR-VARIABLE-NAME").then(r=>{ console.log(r); });
+```
 
 ### Reboot The Espruino
 Allows you to trigger ```E.reboot()``` the the device.
@@ -187,7 +200,6 @@ Allows you to trigger ```E.reboot()``` the the device.
 ```
 myDevice.reboot();
 ```
-
 
 
 ### Ping Espruino
