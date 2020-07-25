@@ -1,0 +1,16 @@
+{
+  "name": "devicerc",
+  "version": "1.0.0",
+  "description": "DeviceRC WSS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ws": "^7.3.1"
+  }
+}
