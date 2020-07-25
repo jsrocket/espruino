@@ -24,7 +24,7 @@ let myDevice = Object.create(deviceRC);
 ### 3. Connect to the websocket server
 
 **Parameters**
- - Device Identifier: - An identifier that matches the value entered in your Espurino program.
+ - Device Identifier: - An identifier that matches the value entered in your Espurino code.
  - Server: - The address and port for your websocket server.
 
 **Returns**
@@ -46,7 +46,7 @@ myDevice.connect("DEVICE-IDENTIFIER","ws://YOUR-SERVER:YOUR-PORT").then((connect
 ### Get On-device Variables
 
 **Parameters**
- - Variable Name: - The name of the variable defined in your Espruino program.
+ - Variable Name: - The name of the variable defined in your Espruino code.
 
 **Returns**
  - The value of the variable.
@@ -57,7 +57,7 @@ myDevice.variable("VARIABLE-NAME").then(r=>{ console.log(r); });
 
 ### Set On-device Variables
 **Parameters**
- - Variable Name: - The name of the variable defined in your Espruino program.
+ - Variable Name: - The name of the variable defined in your Espruino code.
  - Value: - The new value to set the variable to. Can be any valid type.
 
 **Returns**
