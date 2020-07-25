@@ -1,3 +1,10 @@
+# Table Of Contents
+ 1. [Websocket server](https://github.com/protoroboticsgit/espruino/tree/master/devicerc#websocket-server)
+ 2. Espruino Module
+ 3. **Browser JS**
+
+----------------------------------------------
+
 # Browser Setup
 
 ## Include Browser JS File
@@ -29,7 +36,12 @@ myDevice.connect("DEVICE-IDENTIFIER","ws://YOUR-SERVER:YOUR-PORT").then((connect
 });
 ```
 
-## Browser Methods
+
+----------------------------------------------
+
+
+
+# Browser Methods
 
 ### Get On-device Variables
 
@@ -151,7 +163,11 @@ You can adjust the number of records the server holds in memory for each event. 
 myDevice.eventHistory("EVENT-NAME", CNT);
 ```
 
-## Browser Events
+
+----------------------------------------------
+
+
+# Browser Events
 
 **NOTE** All events will contain the device identifier in the event.detail data parameter.
 
