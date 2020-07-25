@@ -118,7 +118,7 @@ wss.on('connection', function connection(ws, req) {
     }
 
     // Fire an event in the browser when a device disconnects
-    ws.on('close', function close(ws, req) {
+    ws.on('close', function close(wsc, req) {
         console.log(`Disconnect from ${ws.device} : ${ws.device_key} on ${new Date().toISOString()}`);
         if(ws.device==="espruino"){
             sendToBrowser(JSON.stringify(["DISCONNECTED", ws.device_key]), ws.device_key);
