@@ -14,11 +14,11 @@
 
 ----------------------------------------------
 
-# Contents
+# Table Of Contents
  1. [Websocket server (Below)](https://github.com/protoroboticsgit/espruino/tree/master/devicerc#websocket-server)
  2. Espruino Module
  3. [Browser JS](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme_browser.md)
-
+ 4. [Example] (https://github.com/protoroboticsgit/espruino/tree/master/devicerc/example)
 ----------------------------------------------
 
 # Websocket Server
