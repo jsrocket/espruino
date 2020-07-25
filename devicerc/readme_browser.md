@@ -2,7 +2,7 @@
  1. [Websocket server](https://github.com/protoroboticsgit/espruino/tree/master/devicerc#websocket-server)
  2. Espruino Module
  3. **Browser JS**
- 4. [Example] ()
+ 4. [Example] (https://github.com/protoroboticsgit/espruino/tree/master/devicerc/example)
  
  
 ----------------------------------------------
