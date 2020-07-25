@@ -23,6 +23,7 @@ wss.on('connection', function connection(ws, req) {
         ws.device_key=req.url.replace("/","");
     }
 
+    console.log(`Connection from ${ws.device} : ${ws.device_key} on ${new Date().toISOString()}`);
 
     /***************************************************
      * SEND TO BROWSER 
@@ -118,6 +119,7 @@ wss.on('connection', function connection(ws, req) {
 
     // Fire an event in the browser when a device disconnects
     ws.on('close', function close(ws, req) {
+        console.log(`Disconnect from ${ws.device} : ${ws.device_key} on ${new Date().toISOString()}`);
         if(ws.device==="espruino"){
             sendToBrowser(JSON.stringify(["DISCONNECTED", ws.device_key]), ws.device_key);
         }
