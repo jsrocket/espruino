@@ -11,6 +11,11 @@ let deviceRC={
             deviceRC.ws.onopen = (event) => {
                 resolve();
             };
+            deviceRC.ws.onclose = (event) => {
+      		setTimeout( ()=>{
+                	deviceRC.connect(deviceKey, server);
+		}, 5000);
+            };
 
             deviceRC.ws.onmessage = (event) => {
                 let m = JSON.parse(event.data);

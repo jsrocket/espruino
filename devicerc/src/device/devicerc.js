@@ -10,9 +10,7 @@ exports.connect = function (P, cb) {
             let WebSocket = require("ws");
             ws.obj = new WebSocket(P.server,{
                 path: '/',
-                port: P.port, 
                 origin: 'Espruino',
-                keepAlive: 60,
                 headers:{ "key":P.key }
             });
 

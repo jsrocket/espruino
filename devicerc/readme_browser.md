@@ -14,11 +14,12 @@
 ### 1. Include the DeviceRC browser JS file
 
 ``` 
-@TODO ADD URL HERE
+https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/src/browser/devicerc.min.js
 ```
 
 ### 2. Create a new devivce
 You can control multiple devices from the same page. Just create a new object for each device you want to control.
+
 ```
 let myDevice = Object.create(deviceRC);
 ```
@@ -26,14 +27,14 @@ let myDevice = Object.create(deviceRC);
 ### 3. Connect to the websocket server
 
 **Parameters**
- - Device Identifier: - An identifier that matches the value entered in your Espurino code.
- - Server: - The address and port for your websocket server.
+ - Device Identifier: - A unique identifier that matches the value entered in your Espurino code.
+ - Server: - The address of your websocket server or ```wss://publicwss.robotictheater.com```
 
 **Returns**
  - A boolean value. True if connected, False if disconnected.
 
 ```
-myDevice.connect("DEVICE-IDENTIFIER","ws://YOUR-SERVER:YOUR-PORT").then((connected)=>{
+myDevice.connect("DEVICE-IDENTIFIER","wss://YOUR-SERVER").then((connected)=>{
   // ... the rest of your code in here.
 });
 ```

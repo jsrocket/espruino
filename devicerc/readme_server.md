@@ -11,8 +11,9 @@
 ## Install NodeJS Server
 
  1. Download the files in the ```/server``` directory
- 2. Update the websocket ```port``` value. By default this is set to 8080. Whatever your value is, make sure the port is open on your firewall.
+ 2. Create a ```.env``` file containing the ```PORT``` value you want the ws server to listen on.
  3. Run ```npm install```
  4. Run the ```server.js``` under PM2 or your favorite process manager
+ 5. I recommend putting [nginx in front of your ws server as a proxy](https://www.nginx.com/blog/websocket-nginx/)
 
-**Note** - If you can't or don't want to run your own server, feel free to use my shared one at ```wss://shared.robotictheater.com:8080```. Be warned, it comes with no promises or guarantee of uptime.
+**Note** - If you can't or don't want to run your own server, feel free to use my shared one at ```wss://publicwss.robotictheater.com```. Be warned, I will do my best but this server comes with no promises or guarantees of uptime. If you want a guarantee of uptime, [I'm always available for hire](mailto:ken@kensapps.com).
