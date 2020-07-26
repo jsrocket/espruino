@@ -10,6 +10,20 @@
 
 # Espruino Integration
 
+## Module Code
+
+```
+https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/device.min.js
+```
+
+Or minified
+
+```
+https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/device.min.js
+```
+
+----------------------------------------------
+
 ## Connect To The Websocket Server
 Include the deviceRC module and call ```connect``` passing the following parameters.
 
