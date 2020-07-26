@@ -41,8 +41,20 @@ exports.connect = function (P, cb) {
                     break;
                     case "F":
                         if(!P.disable || P.disable.indexOf("function")===-1){
-                            let r = global[m[1]](m[2]);
-                            ws.obj.send(JSON.stringify([ "F", m[1], r ]));
+                            try{
+                                let r = false;
+                                
+                                if(m[2]){
+                                    r=global[m[1]](m[2]);
+                                }else{
+                                    r=global[m[1]]();
+                                }
+
+                                ws.obj.send(JSON.stringify([ "F", m[1], r ]));
+                            }catch(e){
+                                ws.obj.send(JSON.stringify([ "F", m[1], e.toString() ]));
+                            }
+                            
                         }
                     break;
                     case "X":
