@@ -23,9 +23,9 @@ The setup contains three components.
 Espruino JS <-->  [Websocket Server] <---> Browser JS
 ```
 
-## Important Note About Security ... 
+## Important Note About Security!!
 
-... There is none! The websocket server in this repo has no notion of authentication or authorization. As long as your browser JS has a valid device identifier it will allow you to send commands to that device. If you will be using this in a production deployment, I would highly recommend adding your own security mechanism.
+There is none! The websocket server in this repo has no notion of authentication or authorization. As long as your browser JS has a valid device identifier it will allow you to send commands to the matching device. If you will be using this in a production deployment, I would highly recommend adding your own security mechanism.  If you are using the public server I made available, I would recommend using a long random string for your device identifier. If you use a common id like "myapp", there is a good chance someone else will as well and that wont be good for you.
 
 ----------------------------------------------
 
