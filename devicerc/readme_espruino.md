@@ -33,9 +33,9 @@ The callback will fire anytime the connection status chnges. It will return True
 let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/device.min.js").connect({
     "sid":"YOUR-WIFI-SID",
     "pwd":"YOUR-WIFI-PASSWORD",
-     "id":"DEVICE-IDENTIFIER",
-     "server":"WEBSOCKET-SERVER",
-     "disable":[]
+    "key":"DEVICE-IDENTIFIER",
+    "server":"WEBSOCKET-SERVER",
+    "disable":[]
 },(connected)=>{
   if(connected){
     
@@ -50,5 +50,5 @@ let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espru
  - Event Value: - The data to record along with the event.
 
 ```
-deviceRC.event("EVENT-NAME", "EVENT-VALUE")
+deviceRC.event("EVENT-NAME", "EVENT-VALUE");
 ```

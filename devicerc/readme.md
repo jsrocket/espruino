@@ -1,4 +1,4 @@
-# DeviceRC - Remote Control Your Espruino Over Wifi Via Websockets
+# DeviceRC - Remote Control Your Espruino From Anywhere
 
 ## Table Of Contents
  1. **Overview**
@@ -11,7 +11,7 @@
 
 ## Overview
 
-The goal of this project is to allow you to control your Espruino from across the web. You could be in the same room or different country.
+The goal of this project is to allow you to control your Espruino from across the web. It doesn't matter if you're in the same room or different country.
 
 There are three components.  
 
@@ -27,9 +27,10 @@ There are three components.
 ### Use your web browser to remotely:
  - Get & set variables on your Espruino
  - Execute functions on your Espruino, passing in parameters and getting return values
- - Executing new code or overwriting existing code on your Espruino
- - Listen for events on on your Espruino
+ - Execute new code or overwriting existing code on your Espruino
+ - Listen for events on your Espruino
  - Setup watchers to monitor variables & functions on your Espruino
+ - Monitoring connection status of your Espruino
  - Rebooting your Espruino
 
 ----------------------------------------------
