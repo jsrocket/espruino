@@ -12,7 +12,17 @@
 
 ----------------------------------------------
 
+# Overview
+The setup contains three components.  
+
+ - The first is the websocket server which will join the code on your Espruino to the code on your Browser.
+ - The second is the Espruino module that handles connecting to the Wifi network as well as all the websocket commands.
+ - The final piece is the browser JS library that will handle all the websocket communications wraps it up into a couple simple functions and event listeners.
+
+```
 Espruino JS <-->  [Websocket Server] <---> Browser JS
+```
+
 
 ----------------------------------------------
 
