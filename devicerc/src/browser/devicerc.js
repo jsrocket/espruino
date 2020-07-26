@@ -1,5 +1,7 @@
 let deviceRC={
     "ws":null,
+    "pingTimeout":5000,
+    "pingInterval":null,
     "queue":{
         "variable":{},
         "function":{},
@@ -12,9 +14,9 @@ let deviceRC={
                 resolve();
             };
             deviceRC.ws.onclose = (event) => {
-      		setTimeout( ()=>{
-                	deviceRC.connect(deviceKey, server);
-		}, 5000);
+                setTimeout( ()=>{
+                        deviceRC.connect(deviceKey, server);
+                }, 5000);
             };
 
             deviceRC.ws.onmessage = (event) => {
@@ -48,8 +50,9 @@ let deviceRC={
                         }));
                     break;
                     case ".":
+                        clearTimeout(deviceRC.pingTimeout);
                         window.dispatchEvent(new CustomEvent("pong", {
-                            detail: m[1]
+                            detail: true
                         }));
                     break;
                 }
@@ -109,6 +112,11 @@ let deviceRC={
     },
     "ping":()=>{
         deviceRC.send(["."]);
+        deviceRC.pingTimeout=setTimeout(()=>{
+            window.dispatchEvent(new CustomEvent("pong", {
+                detail: false
+            }));
+        },5000);
     },
     "send":(payload)=>{
         deviceRC.ws.send(JSON.stringify(payload));

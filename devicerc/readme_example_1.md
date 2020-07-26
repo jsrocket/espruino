@@ -12,7 +12,7 @@
 let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/src/device/devicerc.js").connect({
   "sid":"#####",
   "pwd":"#####",
-  "key":"#####",
+  "key":"example1",
   "server":"publicwss.robotictheater.com",
   "disable":["exec","reboot"]
 },(connected)=>{
@@ -45,4 +45,9 @@ setWatch(function(e) {
   deviceRC.event("BTNPressed","Yes it was");
 }, BTN, { repeat: true, edge: 'rising' });
 
+```
+
+# Browser Code
+
+```
 ```
