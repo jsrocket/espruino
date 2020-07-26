@@ -78,7 +78,9 @@ myDevice.variable("VARIABLE-NAME",VALUE).then(r=>{ console.log(r); });
  - Arg: (optional) - Whatever is set here will be passed into your function.
 
 **Returns**
- - The return value of the function called.
+ - The return value of the function called. 
+
+ **Important Note!** - The function being called MUST return a value.
 
 ```
 myDevice.function("FUNCTION-NAME", ARG).then(r=>{ console.log(r); });
