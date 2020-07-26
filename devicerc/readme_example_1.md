@@ -4,7 +4,10 @@
  3. [Espruino Module](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme_espruino.md)
  4. [Browser JS](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme_browser.md)
  5. **Example 1**
+
 ----------------------------------------------
+
+# Overview
 
 This example will illustrate how to:
 
@@ -13,6 +16,7 @@ This example will illustrate how to:
  - Call functions on your Espruino
  - Listen for events from your Espruino
 
+----------------------------------------------
 
 # Espurino Code
 

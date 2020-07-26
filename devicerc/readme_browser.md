@@ -3,7 +3,7 @@
  2. [Websocket Server](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme_server.md)
  3. [Espruino Module](https://github.com/protoroboticsgit/espruino/tree/master/readme_espruino.md)
  4. **Browser JS**
- 5. [Example](https://github.com/protoroboticsgit/espruino/tree/master/devicerc/example)
+ 5. [Example](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme_example_1.md)
  
  
 ----------------------------------------------
