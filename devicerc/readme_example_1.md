@@ -30,7 +30,7 @@ let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espru
   "sid":"#####",
   "pwd":"#####",
   "key":"#####",
-  "server":"publicwss.robotictheater.com",
+  "server":"publicwss.kensapps.com",
   "disable":[]
 },(connected)=>{
   if(connected){
@@ -99,7 +99,7 @@ setWatch(function(e) {
             let myDevice = Object.create(deviceRC);
             
 
-            myDevice.connect("#####","wss://publicwss.robotictheater.com").then(()=>{ //
+            myDevice.connect("#####","wss://publicwss.kensapps.com").then(()=>{ //
 
                 console.log("Browser connected to myDevice");
 
@@ -111,7 +111,7 @@ setWatch(function(e) {
             *******************************************
 
             let mySecondDevice = Object.create(deviceRC);
-            mySecondDevice.connect("myseconddemoapp","wss://publicwss.robotictheater.com").then(()=>{ //
+            mySecondDevice.connect("myseconddemoapp","wss://publicwss.kensapps.com").then(()=>{ //
                 console.log("Browser connected to mySecondDevice");
             }).catch(e=>{ console.log(e); });
 
