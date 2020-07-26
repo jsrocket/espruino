@@ -12,11 +12,15 @@
 
 ## Module Code
 
+Location 
+[https://github.com/protoroboticsgit/espruino/tree/master/devicerc/src/device](https://github.com/protoroboticsgit/espruino/tree/master/devicerc/src/device)
+
+
 ```
-https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/device.min.js
+https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/device.js
 ```
 
-Or minified
+or minified
 
 ```
 https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/device.min.js
