@@ -1,8 +1,9 @@
 # Table Of Contents
- 1. [Websocket server](https://github.com/protoroboticsgit/espruino/tree/master/devicerc#websocket-server)
- 2. Espruino Module
- 3. **Browser JS**
- 4. [Example](https://github.com/protoroboticsgit/espruino/tree/master/devicerc/example)
+ 1. [Overview](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme.md)
+ 2. [Websocket Server](https://github.com/protoroboticsgit/espruino/tree/master/devicerc#websocket-server)
+ 3. [Espruino Module](https://github.com/protoroboticsgit/espruino/tree/master/readme_espruino.md)
+ 4. **Browser JS**
+ 5. [Example](https://github.com/protoroboticsgit/espruino/tree/master/devicerc/example)
  
  
 ----------------------------------------------
@@ -14,7 +15,7 @@
 ### 1. Include the DeviceRC browser JS file
 
 ``` 
-https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/src/browser/devicerc.min.js
+https://cdn.jsdelivr.net/gh/protoroboticsgit/espruino@master/devicerc/src/browser/devicerc.min.js
 ```
 
 ### 2. Create a new devivce
@@ -28,7 +29,7 @@ let myDevice = Object.create(deviceRC);
 
 **Parameters**
  - Device Identifier: - A unique identifier that matches the value entered in your Espurino code.
- - Server: - The address of your websocket server or ```wss://publicwss.robotictheater.com```
+ - Server: - The address of the websocket server.
 
 **Returns**
  - A boolean value. True if connected, False if disconnected.
@@ -103,13 +104,13 @@ Monitor the value of a variable or function on a specific interval.
 **Parameters**
  - Function or Variable Name: - The name of the function or variable present in your Espruino code.
  - Interval (integer): - The number of milliseconds to wait inbetween polling.
- - History (integer): - The number of records to return when the watcher fires.  The default is 1.
+ - Cnt (integer): - The number of historical records to return when the watcher fires.  The default is 1.
  
 **Returns**
  - The value of the function or variable
 
 ```
-myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", INTERVAL, HISTORY).then(r=>{ console.log(r); });
+myDevice.watcher("FUNCTION-OR-VARIABLE-NAME", INTERVAL, CNT).then(r=>{ console.log(r); });
 ```
 
 ### Deregister An On-device Watcher
@@ -157,7 +158,7 @@ You can adjust the number of records the server holds in memory for each event. 
 
 **Parameters**
  - Event Name: - The name of the event, matching the one set in your Espruino code.
- - CNT: - The integer value indicating the number of event records to keep on the server and return to the event handler 
+ - Cnt: - The integer value indicating the number of event records to keep on the server and return to the event handler 
  
 **Returns**
  - NA
@@ -196,8 +197,8 @@ window.addEventListener("disconnect",(evt)=>{
 Fires when the device responds to a Ping request.
 
 ```
-window.addEventListener("disconnect",(evt)=>{
- console.log("connect", evt.detail);
+window.addEventListener("pong",(evt)=>{
+ console.log("pong", evt.detail);
 });
 ```
 

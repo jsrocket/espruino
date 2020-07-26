@@ -1,8 +1,9 @@
 # Table Of Contents
- 1. [Websocket server](https://github.com/protoroboticsgit/espruino/tree/master/devicerc#websocket-server)
- 2. **Espruino Module**
- 3. [Browser JS](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme_browser.md)
- 4. [Example](https://github.com/protoroboticsgit/espruino/tree/master/devicerc/example)
+ 1. [Overview](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme.md) 
+ 2. [Websocket server](https://github.com/protoroboticsgit/espruino/tree/master/devicerc#websocket-server)
+ 3. **Espruino Module**
+ 4. [Browser JS](https://github.com/protoroboticsgit/espruino/blob/master/devicerc/readme_browser.md)
+ 5. [Example](https://github.com/protoroboticsgit/espruino/tree/master/devicerc/example)
  
  
 ----------------------------------------------
@@ -15,9 +16,8 @@ Include the deviceRC module and call ```connect``` passing the following paramet
 **Parameters**
  - sid (required): Your WIFI's SID
  - pwd (required): Your WIFI's password
- - id (required): A unique device id
+ - key (required): A unique device identifier
  - server (required): The websocket server address
- - port (required): The websocket server port
  - disable (optional): An array containing a list of features to disable. Whatever is passed in will be be allowed to be called from the browser.
    - getvariable
    - setvariable
@@ -35,7 +35,6 @@ let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espru
     "pwd":"YOUR-WIFI-PASSWORD",
      "id":"DEVICE-IDENTIFIER",
      "server":"WEBSOCKET-SERVER",
-     "port":WEBSOCKET-PORT,
      "disable":[]
 },(connected)=>{
   if(connected){
