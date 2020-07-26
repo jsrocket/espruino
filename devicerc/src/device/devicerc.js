@@ -21,6 +21,10 @@ exports.connect = function (P, cb) {
                 ws.cb(true);
             });
 
+            ws.obj.on('error', function(d) {
+                console.log("error",d);
+            });
+
             ws.obj.on('message', function(msg) {                
                 let m=JSON.parse(msg);
                 switch(m[0]){

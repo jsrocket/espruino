@@ -26,7 +26,7 @@ This example will illustrate how to:
  4. Move on to the Browser section below. 
 
 ```
-let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/src/device/devicerc.js").connect({
+let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/src/device/devicerc.min.js").connect({
   "sid":"#####",
   "pwd":"#####",
   "key":"#####",
