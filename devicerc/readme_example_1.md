@@ -6,15 +6,28 @@
  5. **Example 1**
 ----------------------------------------------
 
+This example will illustrate how to:
+
+ - Get variables from your Espruino
+ - Set variables on your Espruino
+ - Call functions on your Espruino
+ - Listen for events from your Espruino
+
+
 # Espurino Code
+
+ 1. Copy and paste this code into your Espruino IDE.
+ 2. Enter in your Wifi SID and Password as well as this devices unique identifier.
+ 3. Flash the code to your Espruino
+ 4. Move on to the Browser section below. 
 
 ```
 let deviceRC = require("https://raw.githubusercontent.com/protoroboticsgit/espruino/master/devicerc/src/device/devicerc.js").connect({
   "sid":"#####",
   "pwd":"#####",
-  "key":"example1",
+  "key":"#####",
   "server":"publicwss.robotictheater.com",
-  "disable":["exec","reboot"]
+  "disable":[]
 },(connected)=>{
   if(connected){
     console.log("Connected to Public WSS");
@@ -49,6 +62,10 @@ setWatch(function(e) {
 
 # Browser Code
 
+ 1. Copy and paste the following code into an HTML page locally.
+ 2. Replace "#####" with your unique device identifier that you used in your Espruino code.
+ 3. Open the html page in your browser, open the developer console and start playing around. 
+
 ```
 <html>
     <head>
@@ -60,9 +77,11 @@ setWatch(function(e) {
             <button id="ledOn">LED On</button>
             <button id="ledOff">LED Off</button>
         </div>
-
+        
         <div>
-            <p>250ms<input type="range" min="250" max="2000" step="250" value="1000" id="blinkRate">2000ms</p>
+            <p>
+                Faster<input type="range" min="250" max="2000" step="250" value="1000" id="blinkRate">Slower
+            </p>
             <button id="startBlinking">Start LED Blinking</button>
             <button id="stopBlinking">Stop LED Blinking</button>
         </div>
@@ -74,12 +93,25 @@ setWatch(function(e) {
         <script>
             
             let myDevice = Object.create(deviceRC);
+            
 
-            myDevice.connect("mydemoapp","wss://publicwss.robotictheater.com").then(()=>{ //
+            myDevice.connect("#####","wss://publicwss.robotictheater.com").then(()=>{ //
 
-                console.log("Browser connected");
+                console.log("Browser connected to myDevice");
 
-           }).catch(e=>{ console.log(e); })
+            }).catch(e=>{ console.log(e); });
+
+           
+            /**************************************
+            If you have multiple devices that you want to control on a single page, simply create a new device object.
+            *******************************************
+
+            let mySecondDevice = Object.create(deviceRC);
+            mySecondDevice.connect("myseconddemoapp","wss://publicwss.robotictheater.com").then(()=>{ //
+                console.log("Browser connected to mySecondDevice");
+            }).catch(e=>{ console.log(e); });
+
+            ***************************/
 
            
             document.getElementById("ledOn").addEventListener("click", ()=>{
@@ -111,7 +143,7 @@ setWatch(function(e) {
             });
 
             window.addEventListener("BTNPressed",(e)=>{
-                alert(`WOW ... at ${e.detail[0]} ${e.detail[1]}`);
+               alert(`WOW ... at ${e.detail[0]} ${e.detail[1]}`);
             });
 
             window.addEventListener("disconnect",(e)=>{
@@ -123,11 +155,12 @@ setWatch(function(e) {
             });
 
             window.addEventListener("pong",(e)=>{
-               console.log("pong", e.detail, "<< This is like a hearbeat checking the Espruino's status.");
+               console.log("pong", e.detail);
             });
 
+            // You can setup an interval that ping/pongs the device to act as a heartbeat to makesure its still online and connected.
             let pingInterval = setInterval(()=>{
-               deviceRC.ping();
+                myDevice.ping();
             },60000)
 
         </script>
