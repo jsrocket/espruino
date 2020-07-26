@@ -1,37 +1,39 @@
 let deviceRC={
     "ws":null,
-    "pingTimeout":5000,
-    "pingInterval":null,
+    "deviceKey":"",
+    "pingTimeout":null,
     "queue":{
         "variable":{},
         "function":{},
         "exec":{}
     },                    
-    "connect":(deviceKey, server)=>{                     
-        return new Promise((resolve, reject) => {
-            deviceRC.ws = new WebSocket(`${server}/${deviceKey}`);
-            deviceRC.ws.onopen = (event) => {
+    "connect":function(deviceKey, server){    
+        this.deviceKey=deviceKey;
+        let that = this;                 
+        return new Promise((resolve, reject)=>{
+            that.ws = new WebSocket(`${server}/${deviceKey}`);
+            that.ws.onopen = (event) => {
                 resolve();
             };
-            deviceRC.ws.onclose = (event) => {
+            that.ws.onclose = (event) => {
                 setTimeout( ()=>{
-                        deviceRC.connect(deviceKey, server);
+                    that.connect(deviceKey, server);
                 }, 5000);
             };
 
-            deviceRC.ws.onmessage = (event) => {
+            that.ws.onmessage = (event) => {
                 let m = JSON.parse(event.data);
                 
                 switch(m[0]){
                     case "VG":
                     case "VS":
-                        deviceRC.queue.variable[m[1]] = m[2];
+                        that.queue.variable[m[1]] = m[2];
                     break;                                    
                     case "F":
-                        deviceRC.queue.function[m[1]] = m[2];
+                        that.queue.function[m[1]] = m[2];
                     break;
                     case "X":
-                        deviceRC.queue.exec[m[1]] = m[2];
+                        that.queue.exec[m[1]] = m[2];
                     break;
                     case "W":
                     case "E":
@@ -50,76 +52,80 @@ let deviceRC={
                         }));
                     break;
                     case ".":
-                        clearTimeout(deviceRC.pingTimeout);
-                        window.dispatchEvent(new CustomEvent("pong", {
-                            detail: true
-                        }));
+                        clearTimeout(that.pingTimeout);
+                        let evtDetail={ detail: {} };
+                        evtDetail.detail[deviceKey]=true;
+                        window.dispatchEvent(new CustomEvent("pong", evtDetail));
                     break;
                 }
             }
         });                
     },                   
-    "variable":(variableName, val)=>{
+    "variable":function(variableName, val){
+        let that = this;
         return new Promise((resolve, reject) => {
             if(typeof val==="undefined"){
-                deviceRC.send(["VG",variableName]);
+                that.send(["VG",variableName]);
             }else{
-                deviceRC.send(["VS",variableName, val]);
+                that.send(["VS",variableName, val]);
             }
 
             let i=setInterval(()=>{
-                if(typeof deviceRC.queue.variable[variableName]!=="undefined"){
+                if(typeof that.queue.variable[variableName]!=="undefined"){
                     clearInterval(i);
-                    resolve(deviceRC.queue.variable[variableName]);
-                    delete deviceRC.queue.variable[variableName];
+                    resolve(that.queue.variable[variableName]);
+                    delete that.queue.variable[variableName];
                 }
             },250);
         });
     },
-    "function":(functionName, params)=>{
+    "function":function(functionName, params){
+        let that = this;
         return new Promise((resolve, reject) => {
-            deviceRC.send(["F",functionName,params]);
+            that.send(["F",functionName,params]);
             let i=setInterval(()=>{
-                if(typeof deviceRC.queue.function[functionName]!=="undefined"){
+                if(typeof that.queue.function[functionName]!=="undefined"){
                     clearInterval(i);
-                    resolve(deviceRC.queue.function[functionName]);                                    
-                    delete deviceRC.queue.function[functionName];
+                    resolve(that.queue.function[functionName]);                                    
+                    delete that.queue.function[functionName];
                 }
             },250);
         });  
     },
-    "watcher":(name, interval, cap=1)=>{
-        deviceRC.send(["W", name, interval, cap]);
+    "watcher":function(name, interval, cap=1){
+        this.send(["W", name, interval, cap]);
     },
-    "eventHistory":(name, cap=1)=>{
-        deviceRC.send(["EVT", name, cap]);
+    "eventHistory":function(name, cap=1){
+        this.send(["EVT", name, cap]);
     },
-    "exec":(id, code)=>{
+    "exec":function(id, code){
+        let that = this;
         return new Promise((resolve, reject) => {
-            deviceRC.send(["X", id, code]);
+            that.send(["X", id, code]);
             let i=setInterval(()=>{
-                if(typeof deviceRC.queue.exec[id]!=="undefined"){
+                if(typeof that.queue.exec[id]!=="undefined"){
                     clearInterval(i);
-                    resolve(deviceRC.queue.exec[id]);                                    
-                    delete deviceRC.queue.exec[id];
+                    resolve(that.queue.exec[id]);                                    
+                    delete that.queue.exec[id];
                 }
             },250);
         });
         
     },
-    "reboot":()=>{
-        deviceRC.send(["R"]);
+    "reboot":function(){
+        this.send(["R"]);
     },
-    "ping":()=>{
-        deviceRC.send(["."]);
-        deviceRC.pingTimeout=setTimeout(()=>{
-            window.dispatchEvent(new CustomEvent("pong", {
-                detail: false
-            }));
+    "ping":function(){        
+        let that=this;
+        this.send(["."]);
+        this.pingTimeout=setTimeout(()=>{
+            let evtDetail={ detail: {} };
+            evtDetail.detail[that.deviceKey]=false;
+            window.dispatchEvent(new CustomEvent("pong", evtDetail));
         },5000);
     },
-    "send":(payload)=>{
-        deviceRC.ws.send(JSON.stringify(payload));
+    "send":function(payload){        
+        this.ws.send(JSON.stringify(payload));
     }
 
 };
