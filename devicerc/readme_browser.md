@@ -198,6 +198,8 @@ window.addEventListener("disconnect",(evt)=>{
 ### Device Pong Response
 Fires when the device responds to a Ping request.
 
+The event.details property will be true if the device is online and responded, false if it is offline.
+
 ```
 window.addEventListener("pong",(evt)=>{
  console.log("pong", evt.detail);
