@@ -115,7 +115,7 @@ exports.connect = function (P, cb) {
     let connectToWifi=()=>{
         wifi.connect(P.sid, { password : P.pwd }, function(err) {
             if (err) {
-                console.log("Connection error: "+err);
+                cb(false);
                 return;
             }
             console.log("Connected to wifi...connecting to the cloud.");
