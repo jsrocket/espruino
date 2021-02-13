@@ -42,7 +42,7 @@ exports.connect = function (pin,options) {
         hold:function(time, cb){
             let heldFor=0;
             interval = setInterval(function() {
-                helfFor+=INTERVALTIME;
+                heldFor+=INTERVALTIME;
 
                 if(heldFor<time && time===true){
                     digitalPulse(pin, 1, offs+E.clip(currentPos,0,1)*mul);                    
