@@ -10,6 +10,7 @@ exports.connect = function (pin,options) {
 
     return {
         move:function(pos, time, holdTime,  callback) {
+            let that=this;
             if (time===undefined) time = 1000;
             var amt = 0;
             if (currentPos===undefined) currentPos = pos;
@@ -21,12 +22,12 @@ exports.connect = function (pin,options) {
                     clearInterval(interval);
                     interval = undefined;
                     amt = 1;
-                    if(holdTime!==null && holdTime>0){
+                    if(typeof holdTime!=="undefined" && holdTime!==null && holdTime>0){
                         if(holdTime===true){
-                            this.hold(holdTime);
+                            that.hold(holdTime);
                             if(callback){ callback(); }
                         }else{
-                            this.hold(holdTime, callback);
+                            that.hold(holdTime, callback);
                         }
                         
                     }else if(callback){
